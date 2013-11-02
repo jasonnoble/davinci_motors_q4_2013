@@ -23,7 +23,7 @@ guard :rspec, :all_on_start => true, :all_after_pass => true do
   watch('app/controllers/application_controller.rb')  { "spec/controllers" }
 
   # Capybara features specs
-  watch(%r{^app/views/(.+)/.*\.(erb|haml|slim)$})     { |m| "spec/features/#{m[1]}_spec.rb" }
+  watch(%r{^app/views/(.+)/.*\.(erb|haml|slim)$})     { "spec" }
 
   # Turnip features and steps
   watch(%r{^spec/acceptance/(.+)\.feature$})
