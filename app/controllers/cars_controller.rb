@@ -1,5 +1,6 @@
 class CarsController < ApplicationController
   def index
+    @cars = Car.all
   end
 
   def new
@@ -13,7 +14,7 @@ class CarsController < ApplicationController
     if @car.save
       redirect_to root_path, notice: "#{@car.year} #{@car.make} #{@car.model} created"
     else
-      # Display errors...
+      render action: 'new'
     end
   end
 

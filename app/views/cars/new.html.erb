@@ -1,5 +1,17 @@
 <h2>New Car</h2>
 
+<% if @car.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@car.errors.count, "error") %> prohibited this car from being saved:</h2>
+
+    <ul>
+      <% @car.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%= form_for(@car) do |form| %>
   <p>
     <%= form.label :make %>

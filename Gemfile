@@ -14,6 +14,7 @@ end
 
 group :test do
   gem 'capybara'
+  gem "shoulda-matchers"
 end
 
 # Use sqlite3 as the database for Active Record

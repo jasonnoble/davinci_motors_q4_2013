@@ -15,4 +15,24 @@ feature "Creating Cars" do
 
     expect(page).to have_content('1967 Ford Mustang created')
   end
+
+  scenario "can create a second car" do
+    # car.create(...)
+    # raise ActiveRecord::RecordInvalid unless car.valid?
+    Car.create!(make: 'Ford', model: 'Mustang', year: '1955', price: 99_000)
+
+    visit '/'
+    click_link 'New Car'
+
+    fill_in 'Make', with: 'Pontiac'
+    fill_in 'Model', with: 'Grand Prix'
+    fill_in 'Year', with: '1997'
+    fill_in 'Price', with: '23.00'
+
+    click_button 'Create Car'
+
+    expect(page).to have_content('1997 Pontiac Grand Prix created')
+
+    expect(page).to have_selector('table tbody tr', :count => 2)
+  end
 end
