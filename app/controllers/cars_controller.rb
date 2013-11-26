@@ -1,45 +1,74 @@
 class CarsController < ApplicationController
+  before_action :set_car, only: [:show, :edit, :update, :destroy]
+
+  # GET /cars
+  # GET /cars.json
   def index
     @cars = Car.all
   end
 
+  # GET /cars/1
+  # GET /cars/1.json
+  def show
+  end
+
+  # GET /cars/new
   def new
     @car = Car.new
   end
 
+  # GET /cars/1/edit
   def edit
-    @car = Car.find(params[:id])
   end
 
+  # POST /cars
+  # POST /cars.json
   def create
-    # Create the new car
     @car = Car.new(car_params)
-    # Redirect to the list of cars and display "Car has been created."
-    if @car.save
-      redirect_to root_path, notice: "#{@car.year} #{@car.make} #{@car.model} created"
-    else
-      render action: 'new'
+
+    respond_to do |format|
+      if @car.save
+        format.html { redirect_to cars_path, notice: "#{@car.year} #{@car.make} #{@car.model} created" }
+        format.json { render action: 'show', status: :created, location: @car }
+      else
+        format.html { render action: 'new' }
+        format.json { render json: @car.errors, status: :unprocessable_entity }
+      end
     end
   end
 
+  # PATCH/PUT /cars/1
+  # PATCH/PUT /cars/1.json
   def update
-    @car = Car.find(params[:id])
-    if @car.update_attributes(car_params)
-      redirect_to root_path, notice: "#{@car.year} #{@car.make} #{@car.model} updated"
-    else
-      render :edit
+    respond_to do |format|
+      if @car.update(car_params)
+        format.html { redirect_to cars_path, notice: "#{@car.year} #{@car.make} #{@car.model} updated" }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @car.errors, status: :unprocessable_entity }
+      end
     end
   end
 
+  # DELETE /cars/1
+  # DELETE /cars/1.json
   def destroy
-    @car = Car.find(params[:id])
-    if @car.destroy
-      redirect_to root_path, notice: "#{@car.year} #{@car.make} #{@car.model} deleted"
+    @car.destroy
+    respond_to do |format|
+      format.html { redirect_to cars_url, notice: "#{@car.year} #{@car.make} #{@car.model} deleted" }
+      format.json { head :no_content }
     end
   end
 
   private
-  def car_params
-    params.require(:car).permit(:make, :model, :year, :price)
-  end
+    # Use callbacks to share common setup or constraints between actions.
+    def set_car
+      @car = Car.find(params[:id])
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def car_params
+      params.require(:car).permit(:make, :model, :year, :price)
+    end
 end
