@@ -7,6 +7,10 @@ class CarsController < ApplicationController
     @car = Car.new
   end
 
+  def edit
+    @car = Car.find(params[:id])
+  end
+
   def create
     # Create the new car
     @car = Car.new(car_params)
@@ -15,6 +19,22 @@ class CarsController < ApplicationController
       redirect_to root_path, notice: "#{@car.year} #{@car.make} #{@car.model} created"
     else
       render action: 'new'
+    end
+  end
+
+  def update
+    @car = Car.find(params[:id])
+    if @car.update_attributes(car_params)
+      redirect_to root_path, notice: "#{@car.year} #{@car.make} #{@car.model} updated"
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @car = Car.find(params[:id])
+    if @car.destroy
+      redirect_to root_path, notice: "#{@car.year} #{@car.make} #{@car.model} deleted"
     end
   end
 

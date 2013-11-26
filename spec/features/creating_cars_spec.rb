@@ -35,4 +35,33 @@ feature "Creating Cars" do
 
     expect(page).to have_selector('table tbody tr', :count => 2)
   end
+
+  scenario "can edit an existing car" do
+    car = Car.create!(make: 'Ford', model: 'Mustang', year: '1955', price: 99_000)
+
+    visit '/'
+
+    within("#car_#{car.id}") do
+      click_link 'Edit'
+    end
+
+    fill_in 'Price', with: '9000'
+    click_button 'Update Car'
+
+    expect(page).to have_content('1955 Ford Mustang updated')
+    expect(page).to have_selector("table tr td", text: '$9,000.00')
+  end
+
+  scenario "can delete an existing car" do
+    car = Car.create!(make: 'Ford', model: 'Mustang', year: '1955', price: 99_000)
+
+    visit '/'
+
+    within("#car_#{car.id}") do
+      click_link 'Delete'
+    end
+
+    expect(page).to have_content('1955 Ford Mustang deleted')
+    expect(page).to_not have_selector("#car_#{car.id}")
+  end
 end
