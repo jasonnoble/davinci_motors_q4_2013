@@ -5,4 +5,8 @@ class Car < ActiveRecord::Base
       less_than: 1_000_000,
       greater_than: 0
   }
+
+  def self.per_page
+    10
+  end
 end

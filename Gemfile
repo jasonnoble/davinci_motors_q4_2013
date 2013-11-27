@@ -8,6 +8,8 @@ gem 'guard-bundler'
 gem 'guard-rspec'
 gem 'factory_girl_rails'
 
+gem 'will_paginate', '~> 3.0'
+
 group :test, :darwin, :development do
   gem 'ruby_gntp'
 end
