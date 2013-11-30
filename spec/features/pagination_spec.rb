@@ -12,6 +12,7 @@ feature "Paginating Cars" do
     # Fix pagination so that it paginates at two records
     Car.stub(:per_page).and_return(2)
   end
+
   scenario "shows the cars on the right page" do
     visit '/'
 

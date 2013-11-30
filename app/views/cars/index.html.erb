@@ -1,7 +1,11 @@
 <h1>Listing cars</h1>
 
+<div class="cars_loading">
+  <%= image_tag('ajax_load.gif') %>
+</div>
+
 <div class="cars">
-  <%= render 'cars' %>
+  <%= render :partial => 'cars' %>
 </div>
 
 <br>

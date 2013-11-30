@@ -2,7 +2,8 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-$ ->
-  $(".pagination a").click ->
-    $.get @href, null, null, "script"
-    false
+$(document).on 'click', '.pagination a', ->
+  $(".cars").hide()
+  $(".cars_loading").show()
+  $.getScript @href
+  false
