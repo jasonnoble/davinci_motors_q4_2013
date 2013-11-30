@@ -1,5 +1,11 @@
 class CarsController < ApplicationController
-  before_action :set_car, only: [:show, :edit, :update, :destroy]
+  before_action :set_car, only: [:show, :edit, :update, :destroy, :payment]
+
+  def payment
+    @payment_calculator = if params[:payment_amount].present? && params[:interest_rate].present?
+      PaymentCalculator.new(@car.price)
+    end
+  end
 
   # GET /cars
   # GET /cars.json

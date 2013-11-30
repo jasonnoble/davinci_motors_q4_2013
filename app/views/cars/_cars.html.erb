@@ -19,7 +19,10 @@
       <td><%= car.make %></td>
       <td><%= car.model %></td>
       <td><%= car.year %></td>
-      <td><%= number_to_currency(car.price) %></td>
+      <td>
+        <%= number_to_currency(car.price) %>
+        (<%= link_to 'Calculate Payment', payment_calculator_path(car) %>)
+      </td>
       <td><%= link_to 'Show', car %></td>
       <td><%= link_to 'Edit', edit_car_path(car) %></td>
       <td><%= link_to 'Delete', car, method: :delete, data: { confirm: 'Are you sure?' } %></td>
