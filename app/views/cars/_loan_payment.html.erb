@@ -1,5 +1,5 @@
 <tr>
-  <td>Date</td>
+  <td><%= (Date.today + loan_payment.payment_number.months).beginning_of_month %></td>
   <td><%= number_to_currency(loan_payment.payment) %></td>
   <td><%= number_to_currency(loan_payment.principle) %></td>
   <td><%= number_to_currency(loan_payment.interest) %></td>

@@ -3,5 +3,8 @@ DavinciMotors::Application.routes.draw do
 
   resources :cars
 
-  match '/cars/:id/payments', to: 'cars#payments', via: [:get, :post, :patch], as: 'payment_calculator'
+  match '/cars/:id/payments',
+        to: 'cars#payments',
+        via: [:get, :post, :patch],
+        as: 'payment_calculator'
 end
