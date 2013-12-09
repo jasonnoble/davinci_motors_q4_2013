@@ -8,7 +8,11 @@ DavinciMotors::Application.routes.draw do
         via: [:get, :post, :patch],
         as: 'payment_calculator'
 
-  resources :users, only: [:new, :create], path_names: { new: "signup"}
+  get '/cars/:id/claim',
+      to: 'cars#claim',
+      as: 'claim_car'
+
+  resources :users, only: [:new, :create], path_names: {new: "signup"}
 
   get '/login',
       to: 'sessions#login',

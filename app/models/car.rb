@@ -6,6 +6,8 @@ class Car < ActiveRecord::Base
       greater_than: 0
   }
 
+  belongs_to :user
+
   def self.per_page
     10
   end
