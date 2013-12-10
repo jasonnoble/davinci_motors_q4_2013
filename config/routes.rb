@@ -19,6 +19,9 @@ DavinciMotors::Application.routes.draw do
   post '/login',
        to: 'sessions#create'
 
+  get '/auth/:provider/callback',
+      to: 'sessions#oauth'
+
   delete '/logout',
          to: 'sessions#destroy'
 end

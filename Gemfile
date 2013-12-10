@@ -5,6 +5,8 @@ gem 'rails', '4.0.0'
 
 gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'faker'
+gem 'omniauth-github'
+gem 'omniauth-twitter'
 
 gem 'rspec-rails'
 gem 'guard-bundler'
