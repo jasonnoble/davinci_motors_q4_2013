@@ -12,6 +12,13 @@ DavinciMotors::Application.routes.draw do
       to: 'cars#claim',
       as: 'claim_car'
 
+  delete '/cars/:id/claim',
+      to: 'cars#unclaim'
+
+  get '/my_cars',
+      to: 'cars#my_cars',
+      as: 'my_cars'
+
   resources :users, only: [:new, :create], path_names: {new: "signup"}
 
   get '/login',

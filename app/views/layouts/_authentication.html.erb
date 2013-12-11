@@ -1,5 +1,6 @@
 <% if current_user %>
     Signed in as <%= current_user.email %>
+    <%= link_to 'My Cars', my_cars_path %>
     <%= link_to 'Logout', logout_path,
                 method: :delete,
                 :data => { confirm: 'Are you sure?' } %>

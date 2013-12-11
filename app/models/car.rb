@@ -11,4 +11,8 @@ class Car < ActiveRecord::Base
   def self.per_page
     10
   end
+
+  def owned_by?(current_user)
+    user.present? && user == current_user
+  end
 end
