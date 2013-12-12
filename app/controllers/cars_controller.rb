@@ -1,5 +1,13 @@
 class CarsController < ApplicationController
-  before_action :set_car, only: [:show, :edit, :update, :destroy, :payments]
+  before_action :set_car, only: [:show, :edit, :update, :destroy, :payments, :claim]
+
+  def claim
+    if current_user
+      current_user.cars << @car
+      redirect_to root_path,
+        notice: "#{@car.make} #{@car.model} has been moved to your inventory."
+    end
+  end
 
   def payments
     if params[:interest_rate].present? && params[:payment_amount].present?
@@ -11,7 +19,7 @@ class CarsController < ApplicationController
   # GET /cars.json
   def index
     #sleep 2
-    @cars = Car.paginate(page: params[:page])
+    @cars = Car.where(user_id: nil).paginate(page: params[:page])
   end
 
   # GET /cars/1

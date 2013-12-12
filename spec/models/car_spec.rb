@@ -11,4 +11,6 @@ describe Car do
 
   it { should validate_numericality_of(:price).
                   is_greater_than(0).is_less_than(1_000_000) }
+
+  it { should belong_to(:user) }
 end
