@@ -1,5 +1,8 @@
 class CarsController < ApplicationController
-  before_action :set_car, only: [:show, :edit, :update, :destroy, :payments, :claim, :unclaim]
+  before_action :set_car,
+                only: [:show, :edit, :update,
+                       :destroy, :payments, :claim,
+                       :unclaim]
 
   def my_cars
     @cars = Car.where(user_id: current_user.id).paginate(page: params[:page])
@@ -15,7 +18,8 @@ class CarsController < ApplicationController
   def unclaim
     if current_user && @car.owned_by?(current_user)
       @car.update_attributes(user: nil)
-      redirect_to my_cars_path, notice: "#{@car.make} #{@car.model} has been removed from your inventory."
+      redirect_to my_cars_path,
+        notice: "#{@car.make} #{@car.model} has been removed from your inventory."
     end
   end
 

@@ -13,6 +13,6 @@ class Car < ActiveRecord::Base
   end
 
   def owned_by?(current_user)
-    user.present? && user == current_user
+    current_user.present? && user == current_user
   end
 end
